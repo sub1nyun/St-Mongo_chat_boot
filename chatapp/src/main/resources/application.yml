@@ -2,5 +2,6 @@ spring:
   data:
     mongodb:
       host: localhost
-      port: 27017
+      port: 27017 #mongdb 기본 포트 번호
       database: chatdb
+      # reactive web 은 스프링부트 5.0과 netty(내장)라는 서버를 사용하며 싱글 스레드로 -> 비동기 서버를 만들어줌
