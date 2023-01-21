@@ -2,9 +2,8 @@ package com.cos.chatapp;
 
 import java.time.LocalDateTime;
 
-import javax.print.attribute.standard.Media;
-
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +17,14 @@ import reactor.core.scheduler.Schedulers;
 
 @RequiredArgsConstructor // 생성자
 @RestController // 데이터 리턴을 위한 서버
+@CrossOrigin 	//기본적으로 자바스크립트 요청을 할 수 없음 -> 서버가 막고 있음 
+//요청을 허락하기
 public class ChatController {
 	
 	private final ChatRepository chatRepository;
 	
+
+
 	//TEXT_EVENT_STREAM_VALUE -> SSE 프로토콜
 	// -> 데이터가 새로 생길때마다 지속적으로 보내줌(응답 유지)
 	@GetMapping(value = "/sender/{sender}/receiver/{receiver}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
@@ -29,7 +32,7 @@ public class ChatController {
 		return chatRepository.mFindBySender(sender, receiver)
 				.subscribeOn(Schedulers.boundedElastic());
 	}
-	
+ // 자바 스크립트 요청 받기
 	//데이터를 넣어주는 요청
 	@PostMapping("/chat") //Mono -> 데이터를 한 번만 리턴 
 	// 타입을 void로 해도 되지만 결과 데이터를 보기 위해서 Mono로 했음
