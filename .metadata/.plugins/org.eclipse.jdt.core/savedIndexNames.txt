@@ -43,9 +43,9 @@ INDEX VERSION 1.131+D:\sby-mongo-chat\.metadata\.plugins\org.eclipse.jdt.core
 1257938077.index
 886567334.index
 904581221.index
-2084300444.index
-237940758.index
 1177692688.index
+237940758.index
+2084300444.index
 1258163219.index
 4120565087.index
 1793051245.index
@@ -86,7 +86,6 @@ INDEX VERSION 1.131+D:\sby-mongo-chat\.metadata\.plugins\org.eclipse.jdt.core
 1865797976.index
 3133768696.index
 2663105395.index
-1332879940.index
 3096186223.index
 1160649672.index
 4181020315.index

@@ -38,7 +38,6 @@ public class ChatController {
 	// 타입을 void로 해도 되지만 결과 데이터를 보기 위해서 Mono로 했음
 	public Mono<Chat> setMsg(@RequestBody Chat chat) { 
 		chat.setCreatedAt(LocalDateTime.now());
-		return chatRepository.save(chat); // Object를 리턴하면 자동으로 JSON으로 변환 (MessageConverter)
+		return chatRepository.save(chat);
 	}
-	//Mono 타입은 데이터 한 건을 다시 리턴해줌 -> chat 오브젝트
 }
