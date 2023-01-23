@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 
 @RequiredArgsConstructor // 생성자
@@ -41,4 +42,12 @@ public class ChatController {
 		return chatRepository.save(chat); // Object를 리턴하면 자동으로 JSON으로 변환 (MessageConverter)
 	}
 	//Mono 타입은 데이터 한 건을 다시 리턴해줌 -> chat 오브젝트
+	
+	// 모든 채팅 이력을 받아야함
+	@GetMapping(value = "/chat/roomNum/{roomNum}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public Flux<Chat> findByusername(@PathVariable Integer roomNum) {
+		return chatRepository.mFindbyRoomNum(roomNum)
+				.subscribeOn(Schedulers.boundedElastic());
+	}
+	
 }
